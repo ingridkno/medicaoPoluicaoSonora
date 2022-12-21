@@ -97,6 +97,7 @@ g_lat_long = g.latlng
 
 #repetições de cada ponto de medição
 repetibilidade_medicao=3
+LR_medido_emissor=0
 
 #MAPA
 m = folium.Map(location=g_lat_long, zoom_start=16)#, width=300, height=200)
