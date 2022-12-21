@@ -92,7 +92,7 @@ current_time = time.strftime("%H:%M:%S", t)
 #localização atual
 g = geocoder.ip('me')
 g_lat_long = g.latlng
-g_lat_long  =[-27.600723, -48.581245]
+#g_lat_long  =[-27.600723, -48.581245]
 #st.text(g_lat_long)
 
 #repetições de cada ponto de medição
@@ -191,27 +191,37 @@ if ajuste_realizado:
             st.write('**Nível de Pressão Sonora Específico**')
             #st.write(media_NPS_total)
             #st.write(media_NPS_residual)
+            componente_medicao_interna = 0
+            if option_metodomedicao==tipos_medicao[2]:
+                componente_medicao_interna = -k +10
+
+
             if (media_NPS_total-media_NPS_residual)>15:
                 st.write('NPS Total - NPS Residual > 15 dB')
                 st.write('Lesp = Ltot = ', media_NPS_total)
-                LR_medido_emissor = media_NPS_total
+                LR_medido_emissor = media_NPS_total + componente_medicao_interna
 
             elif media_NPS_total-media_NPS_residual>=3:
                 subtracao_energia_db = calculo_subtracao_energia_db(media_NPS_total, media_NPS_residual)
                 st.write('3 dB <= NPS Total - NPS Residual < 15 dB')
                 st.write('Lesp = ', subtracao_energia_db)
-                LR_medido_emissor = subtracao_energia_db
+                LR_medido_emissor = subtracao_energia_db + componente_medicao_interna
             else:
                 st.write('NPS total - NPS residual < 3 dB')
                 st.write("Não é possível determinar com exatidão o nível de pressão sonora do som específico. \
                 Recomenda-se informar no relatório que o nível de pressão sonora do som específico é próximo ao nível de pressão sonora residual.")
+                LR_medido_emissor = 0
+
+        
 
 
 with st.expander("7 - Avaliação sonora em ambientes externos"):
 
+
     limites_NPS.set_index(limites_NPS.columns[0], inplace = True)
     tipo_area_medida = st.selectbox('Tipo de área medida', limites_NPS.index, index=1)
     st.write('Período ', periodo_medicao)
+    st.write ('NPS para comparação = ', LR_medido_emissor)
     
     st.dataframe(limites_NPS)
     
