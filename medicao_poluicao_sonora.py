@@ -1,3 +1,8 @@
+from bokeh.models.widgets import Button
+from bokeh.models import CustomJS
+from streamlit_bokeh_events import streamlit_bokeh_events
+
+
 
 import streamlit as st
 st.set_page_config(layout="wide")
@@ -93,6 +98,26 @@ g = geocoder.ip('me')
 g_lat_long = g.latlng
 #g_lat_long  = [-27.600723, -48.581245]
 #st.text(g_lat_long)
+loc_button = Button(label="Get Location")
+loc_button.js_on_event("button_click", CustomJS(code="""
+    navigator.geolocation.getCurrentPosition(
+        (loc) => {
+            document.dispatchEvent(new CustomEvent("GET_LOCATION", {detail: {lat: loc.coords.latitude, lon: loc.coords.longitude}}))
+        }
+    )
+    """))
+result = streamlit_bokeh_events(
+    loc_button,
+    events="GET_LOCATION",
+    key="get_location",
+    refresh_on_update=False,
+    override_height=75,
+    debounce_time=0)
+
+#st.write(result)
+g_lat_long  = [result["GET_LOCATION"]['lat'], result["GET_LOCATION"]['lon']]
+
+
 
 #repetições de cada ponto de medição
 repetibilidade_medicao=3
