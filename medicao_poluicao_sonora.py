@@ -88,11 +88,10 @@ current_time = time.strftime("%H:%M:%S", t)
 
 #st.write(dia)
 
-
 #localização atual
 g = geocoder.ip('me')
 g_lat_long = g.latlng
-#g_lat_long  =[-27.600723, -48.581245]
+#g_lat_long  = [-27.600723, -48.581245]
 #st.text(g_lat_long)
 
 #repetições de cada ponto de medição
@@ -193,8 +192,9 @@ if ajuste_realizado:
             #st.write(media_NPS_total)
             #st.write(media_NPS_residual)
             componente_medicao_interna = 0
-            if option_metodomedicao==tipos_medicao[2]:
+            if option_tipomedicao==tipos_medicao[2]:
                 componente_medicao_interna = -k +10
+                st.write(componente_medicao_interna)
 
 
             if (media_NPS_total-media_NPS_residual)>15:
