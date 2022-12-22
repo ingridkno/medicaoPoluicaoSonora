@@ -98,7 +98,7 @@ current_time = time.strftime("%H:%M:%S", t)
 #g_lat_long = g.latlng
 #g_lat_long  = [-27.600723, -48.581245]
 #st.text(g_lat_long)
-loc_button = Button(label="Get Location")
+loc_button = Button(label="Atualizar Localização")
 loc_button.js_on_event("button_click", CustomJS(code="""
     navigator.geolocation.getCurrentPosition(
         (loc) => {
