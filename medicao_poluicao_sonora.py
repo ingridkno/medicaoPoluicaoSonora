@@ -10,6 +10,7 @@ import pandas as pd
 import math
 import time
 import datetime as dt
+import pytz
 import holidays
 import geocoder
 import folium
@@ -88,8 +89,10 @@ limites_NPS = pd.read_csv('limites_NPS.csv')
 #VARIAVEIS
 
 #tempo atual
-t = time.localtime()
-current_time = time.strftime("%H:%M:%S", t)
+# t = time.localtime()
+# current_time = time.strftime("%H:%M:%S", t)
+t = dt.datetime.now(tz= pytz.timezone('Brazil/East')).time()#time.localtime()
+current_time = str(t).split('.')[0]#time.strftime("%H:%M:%S", str(t))
 
 #st.write(dia)
 
