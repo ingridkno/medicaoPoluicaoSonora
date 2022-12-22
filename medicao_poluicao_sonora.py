@@ -94,8 +94,8 @@ current_time = time.strftime("%H:%M:%S", t)
 #st.write(dia)
 
 #localização atual
-g = geocoder.ip('me')
-g_lat_long = g.latlng
+#g = geocoder.ip('me')
+#g_lat_long = g.latlng
 #g_lat_long  = [-27.600723, -48.581245]
 #st.text(g_lat_long)
 loc_button = Button(label="Get Location")
@@ -114,9 +114,10 @@ result = streamlit_bokeh_events(
     override_height=75,
     debounce_time=0)
 
-#st.write(result)
-g_lat_long  = [result["GET_LOCATION"]['lat'], result["GET_LOCATION"]['lon']]
-
+if ValueError:
+    g_lat_long  = [-27.600723, -48.581245]
+else:
+    g_lat_long  = [result["GET_LOCATION"]['lat'], result["GET_LOCATION"]['lon']]
 
 
 #repetições de cada ponto de medição
