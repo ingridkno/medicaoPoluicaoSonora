@@ -181,9 +181,9 @@ with st.expander("3 - Definição de pontos de medição"):
     if option_tipomedicao == tipos_medicao[2]:
         mobiliado = st.checkbox('Ambiente com mobília', value=True)
         if mobiliado:
-            k=3
-        else:
             k=0
+        else:
+            k=3
 
 
 with st.expander("4 - Definição do método de medição"):
