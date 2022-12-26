@@ -89,9 +89,9 @@ limites_NPS = pd.read_csv('limites_NPS.csv')
 #VARIAVEIS
 
 #tempo atual
-# t = time.localtime()
-# current_time = time.strftime("%H:%M:%S", t)
-t = dt.datetime.now(tz= pytz.timezone('Brazil/East')).time()#time.localtime()
+data_hoje = dt.datetime.now(tz= pytz.timezone('Brazil/East'))
+t = data_hoje.time()#time.localtime()
+#st.write(t)
 current_time = str(t).split('.')[0]#time.strftime("%H:%M:%S", str(t))
 
 #st.write(dia)
