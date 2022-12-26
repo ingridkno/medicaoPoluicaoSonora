@@ -117,10 +117,10 @@ result = streamlit_bokeh_events(
     override_height=75,
     debounce_time=0)
 
-# if ValueError:
-#     g_lat_long  = [-27.600723, -48.581245]
-# else:
-g_lat_long  = [result["GET_LOCATION"]['lat'], result["GET_LOCATION"]['lon']]
+try:
+    g_lat_long  = [result["GET_LOCATION"]['lat'], result["GET_LOCATION"]['lon']]
+except:
+    g_lat_long  = [-27.60719459363507, -48.46709599461304]
 
 
 #repetições de cada ponto de medição
