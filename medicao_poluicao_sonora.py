@@ -143,8 +143,8 @@ st.title('Guia de Medição de Poluição Sonora')
 # call to render Folium map in Streamlit
 folium_static(m)
 periodo_medicao = tipo_periodo(current_time)
-st.write('Hora: ', current_time, ', Período: ', periodo_medicao)
-
+st.write('Hora: ', current_time, ', Data: ', str(data_hoje).split()[0])
+st.write('Período ', periodo_medicao)
 
 #with col1:
 with st.expander("1 - Atendimento dos requisitos ambientais"):
