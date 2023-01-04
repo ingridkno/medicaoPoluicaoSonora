@@ -426,5 +426,5 @@ df_xlsx = to_excel(relatorio.reset_index())
 
 st.download_button(label='📥 Baixar Relatório',
                                 data=df_xlsx ,
-                                file_name= 'relatorio_medicao_'+data_hoje_string+'.xlsx')
+                                file_name= 'relatorio_medicao_'+data_hoje_string+'_'+nome_responsavel+'.xlsx')
 
