@@ -3,6 +3,8 @@ folium==0.13.0
 geocoder==1.38.1
 holidays==0.17.2
 pandas==1.4.4
+pytz==2022.1
+pyxlsb==1.0.10
 streamlit==1.15.2
 streamlit_bokeh_events==0.1.2
 streamlit_folium==0.8.1
