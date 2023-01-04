@@ -203,6 +203,8 @@ st.write('Período ', periodo_medicao)
 
 #with col1:
 with st.expander("0 - Informações sobre local de medição"):
+    nome_responsavel= st.text_input('Nome do responsável', placeholder='Nome do responsável pela medição')
+    nome_estabelecimento= st.text_input('Nome do estabelecimento', placeholder='Nome do estabelecimento medido')
     info_local = st.text_input('Informações', placeholder='Observações sobre local de medição')
     
     
@@ -383,6 +385,8 @@ relatorio = pd.DataFrame(columns=colunas)
 
 #PREENCHENDO O DATAFRAME RELATORIO
 
+relatorio.loc['Nome responsavel', colunas[0]]= nome_responsavel
+relatorio.loc['Nome estabelecimento medido', colunas[0]]= nome_estabelecimento
 relatorio.loc['Informacoes Local de Medicao', colunas[0]]=info_local
 relatorio.loc['Localizacao', colunas[0]]=g_lat_long
 relatorio.loc['Requisitos Ambientais', colunas[1:3]]=[justificativa_ambiental, t_01]
@@ -423,5 +427,4 @@ df_xlsx = to_excel(relatorio.reset_index())
 st.download_button(label='📥 Baixar Relatório',
                                 data=df_xlsx ,
                                 file_name= 'relatorio_medicao_'+data_hoje_string+'.xlsx')
-
 
