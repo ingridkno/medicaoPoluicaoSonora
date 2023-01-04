@@ -11,6 +11,7 @@ import json
 
 from io import BytesIO
 from pyxlsb import open_workbook as open_xlsb
+import xlsxwriter
 
 import math
 import time
