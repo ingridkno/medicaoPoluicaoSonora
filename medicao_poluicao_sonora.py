@@ -1,5 +1,4 @@
 #https://ingridkno-medicaopoluicaosonora-medicao-poluicao-sonora-w0qrps.streamlit.app/
-
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
@@ -196,7 +195,9 @@ st.write('_Desenvolvido por Ingrid Knochenhauer_')
 # call to render Folium map in Streamlit
 folium_static(m)
 periodo_medicao = tipo_periodo(current_time)
-st.write('Hora: ', current_time, ', Data: ', str(data_hoje).split()[0])
+
+data_hoje_string = str(data_hoje).split()[0]
+st.write('Hora: ', current_time, ', Data: ', data_hoje_string)
 st.write('Período ', periodo_medicao)
 
 
@@ -348,16 +349,24 @@ with st.expander("7 - Avaliação sonora em ambientes externos"):
 
     limites_NPS.set_index(limites_NPS.columns[0], inplace = True)
     tipo_area_medida = st.selectbox('Tipo de área medida', limites_NPS.index, index=1)
-    st.write('Período ', periodo_medicao.lower())
+    periodo_procurado = 'Período '+ periodo_medicao.lower()
+    st.write(periodo_procurado)
     st.write ('NPS para comparação = ', LR_medido_emissor)
     
     st.dataframe(limites_NPS)
 
-    periodo_procurado = 'Período '+ periodo_medicao.lower()
-    
-    #if LR_medido_emissor> limites_NPS.loc[tipo_area_medida, periodo_medicao.lower()]:
-    #    st.write ('Medição acima do nível aceitado para tipo de área habitada e período do dia.')
-    #    st.write ('Medição acima do nível aceitado para tipo de área habitada e período do dia.')
+        
+    NPS_aceitavel = limites_NPS.loc[tipo_area_medida, periodo_procurado]
+    if LR_medido_emissor> NPS_aceitavel :
+        msg_nps_comparacao = "**NPS medido** ("+str(LR_medido_emissor)+" dB) > " + str(NPS_aceitavel) + " dB"
+        msg_dentro_norma = 'Medição **acima do nível aceitado** para '+periodo_procurado.lower()+' em '+tipo_area_medida.lower()+ '.'
+
+    else:
+        msg_nps_comparacao ="**NPS medido** ("+str(LR_medido_emissor)+" dB) <= " + str(NPS_aceitavel) + " dB"
+        msg_dentro_norma = 'Medição **dentro do nível aceitado** para '+periodo_procurado.lower()+' em '+tipo_area_medida.lower()+ '.'
+
+    st.write( msg_nps_comparacao )
+    st.write ( msg_dentro_norma )
 
 
 
@@ -396,7 +405,7 @@ relatorio.loc['Calculo L especifico', colunas[3+repetibilidade_medicao]] = Lesp
 relatorio.loc['Lr', colunas[0:2]] = [LR_medido_emissor, mensagem_medicao_interna]
 relatorio.loc['Tipo area medida', colunas[0]] = tipo_area_medida
 relatorio.loc['Periodo medido', colunas[0]] = periodo_medicao
-relatorio.loc['Classificacao da emissao do ruido', colunas[0:2]] = ['','']
+relatorio.loc['Classificacao da emissao do ruido', colunas[0:2]] = [msg_dentro_norma,msg_nps_comparacao]
 
 
 #st.write(medicao_pontos_tot)
@@ -413,5 +422,6 @@ df_xlsx = to_excel(relatorio.reset_index())
 
 st.download_button(label='📥 Baixar Relatório',
                                 data=df_xlsx ,
-                                file_name= 'relatorio_medicao.xlsx')
+                                file_name= 'relatorio_medicao_'+data_hoje_string+'.xlsx')
+
 
