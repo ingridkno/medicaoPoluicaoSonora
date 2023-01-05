@@ -188,7 +188,7 @@ folium.Marker(
 #LAYOUT PAGINA
 st.title('Guia de Medição Sonora')
 st.subheader('Conforme NBR 10.151/2019')
-st.write('_Desenvolvido por Ingrid Knochenhauer_')
+#st.write('_Desenvolvido por Ingrid Knochenhauer_')
 
 #col1, col2 = st.columns(2)
 #with col2:
