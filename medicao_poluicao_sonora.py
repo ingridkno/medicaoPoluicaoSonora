@@ -280,7 +280,7 @@ with st.expander("5 - Ajuste do sonômetro"):
     st.write('**Se a diferença for maior ou inferior ao valor absoluto de 0,5 dB, os resultados devem ser descartados e novas medições realizadas.**')
     
     mensagem_ajuste_true = 'Ajuste do sonômetro realizado e dentro da diferença de 0,5 dB'
-    ajuste_realizado = st.checkbox(mensagem_ajuste_true, value=False)
+    ajuste_realizado = st.checkbox(mensagem_ajuste_true, value=True)
 
 if ajuste_realizado:
     with st.expander("6 - Definição do nível de pressão sonora"):
