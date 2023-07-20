@@ -116,9 +116,7 @@ def preenche_medicoes(valores_por_ponto, medicao_pontos, pontos_medicao, repetib
 
 def to_excel(df):
     output = BytesIO()
-    writer = pd.ExcelWriter(output, encoding='utf-8', index=False)#engine='xlsxwriter') #, options={'remove_timezone': True}
-    output.seek(0)
-    b64 = base64.b64encode(towrite.read()).decode()
+    writer = pd.ExcelWriter(output, encoding='utf-8', index=False, options={'remove_timezone': True})
     df.to_excel(writer, index=False, sheet_name='Sheet1')
     workbook = writer.book
     worksheet = writer.sheets['Sheet1']
@@ -422,11 +420,11 @@ relatorio.loc['Classificacao da emissao do ruido', colunas[0:2]] = [msg_dentro_n
 st.dataframe(relatorio)
 
 relatorio = relatorio.astype(str)
-df_xlsx = to_excel(relatorio.reset_index())
+# df_xlsx = to_excel(relatorio.reset_index())
 
 
 
-st.download_button(label='📥 Baixar Relatório',
-                                data=df_xlsx ,
-                                file_name= 'relatorio_medicao_'+data_hoje_string+'_'+nome_responsavel+'.xlsx')
+# st.download_button(label='📥 Baixar Relatório',
+#                                 data=df_xlsx ,
+#                                 file_name= 'relatorio_medicao_'+data_hoje_string+'_'+nome_responsavel+'.xlsx')
 
