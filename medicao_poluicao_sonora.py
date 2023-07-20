@@ -116,7 +116,9 @@ def preenche_medicoes(valores_por_ponto, medicao_pontos, pontos_medicao, repetib
 
 def to_excel(df):
     output = BytesIO()
-    writer = pd.ExcelWriter(output, engine='xlsxwriter') #, options={'remove_timezone': True}
+    writer = pd.ExcelWriter(output, , encoding='utf-8', index=False)#engine='xlsxwriter') #, options={'remove_timezone': True}
+    output.seek(0)
+    b64 = base64.b64encode(towrite.read()).decode()
     df.to_excel(writer, index=False, sheet_name='Sheet1')
     workbook = writer.book
     worksheet = writer.sheets['Sheet1']
