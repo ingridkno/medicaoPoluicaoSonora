@@ -288,7 +288,7 @@ with st.expander("3 - Definição de pontos de medição"):
     st.write("Nº de pontos de medição do ruído residual = ", pontos_medicao_residual)
 
     repetibilidade_medicao = st.number_input(
-        "Número de repetições para cada ponto de medição", value=3, step=1
+        "Número de repetições para cada ponto de medição", value=2, step=1
     )
     st.write("Nº de repetições de medição = ", repetibilidade_medicao)
 
